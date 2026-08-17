@@ -328,19 +328,101 @@
             <ul role="list" class="flex flex-col py-4">
 
                 <li>
-                    <a href="./index.html" class="mob-item">Home</a>
+                    <a href="./index.html" class="mob-item flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 10.5 12 3l9 7.5"/>
+                    <path d="M5 9.5V21h14V9.5"/>
+                    <path d="M9 21v-6h6v6"/>
+                </svg>
+                    Home
+                    </a>
                 </li>
                 <li>
-                    <a href="./speakers.html" class="mob-item">Speakers</a>
+                <a href="./inspiration.html" class="mob-item flex items-center gap-2">
+                <svg
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <!-- Light bulb -->
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  d="M9 18h6M10 21h4M8.5 15.5A6 6 0 1 1 15.5 15c-.7.6-1.1 1.4-1.3 2.3H9.8a4.4 4.4 0 0 0-1.3-1.8Z"
+                />
+              
+                <!-- Bulb filament -->
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  d="M10 12.5c.7-.5 1.2-1.1 1.2-2.1M14 12.5c-.7-.5-1.2-1.1-1.2-2.1"
+                />
+              
+                <!-- Inspiration rays -->
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.8"
+                  d="M12 2v1.5M4.9 4.9 6 6M2 12h1.5M19.1 4.9 18 6M20.5 12H22"
+                />
+              </svg>
+                Inspiration
+                </a>
+            </li>
+                <li>
+                    <a href="./speakers.html" class="mob-item flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="3.5"/>
+                    <path d="M5 21c.6-3.5 3.1-6 7-6s6.4 2.5 7 6"/>
+                </svg>
+                    Speakers
+                    </a>
                 </li>
                 <li>
-                    <a href="./agenda.html" class="mob-item">Agenda</a>
+                    <a href="./agenda.html" class="mob-item flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="5" width="18" height="16" rx="2"/>
+                    <path d="M16 3v4M8 3v4M3 10h18"/>
+                    <path d="M8 14h2M14 14h2M8 17h2M14 17h2"/>
+                </svg>
+                    Agenda
+                    </a>
                 </li>
                 <li>
-                    <a href="./contact.html" class="mob-item">Contact</a>
+                    <a href="./contact.html" class="mob-item flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <path d="m3 7 9 6 9-6"/>
+                </svg>
+                    Contact
+                    </a>
                 </li>
                 <li>
-                    <a href="#" class="mob-item">Brochure</a>
+                    <a href="#" class="mob-item flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 3h9l4 4v14H6z"/>
+                    <path d="M14 3v5h5"/>
+                    <path d="M9 13h6M9 17h6"/>
+                </svg>
+                    Brochure
+                    </a>
                 </li>
 
                 <!-- More — click expands black submenu below -->

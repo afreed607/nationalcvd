@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda | National CVD Summit</title>
+    <link rel="icon" href="https://tricog.com/wp-content/uploads/2022/08/cropped-fav-192x192.png" sizes="192x192" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .kicker {
+            color: #b7232c;
+            letter-spacing: .08em;
+        }
+
+        .daylabel {
+            font-size: 14px;
+            color: #9a9aa2;
+            letter-spacing: .06em;
+        }
+
+        .tab {
+            font-size: 14px;
+            border-radius: 6px;
+            padding: 10px 34px;
+            color: #6b6b73;
+            background: transparent;
+            transition: background .15s, color .15s;
+        }
+
+        .tab:hover {
+            background: #f6f6f7;
+        }
+
+        .tab[aria-selected="true"] {
+            background: #e0242e;
+            color: #fff;
+        }
+
+        .tab:focus-visible {
+            outline: 2px solid #b7232c;
+            outline-offset: 2px;
+        }
+
+        .time-col {
+            width: 84px;
+            min-width: 84px;
+            font-size: 13px;
+            color: #6b6b73;
+            line-height: 1.35;
+            padding-top: 12px;
+        }
+
+        .marker {
+            width: 26px;
+            height: 26px;
+            border: 1px solid #f3ccd0;
+            border-radius: 9999px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .track {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            background: #efeef1;
+        }
+
+        .sessionbar {
+            background: linear-gradient(90deg, #e7effb 0%, #eff5fd 45%, #ffffff 100%);
+            color: #24406b;
+            font-size: 14.5px;
+            line-height: 1.2;
+            padding: 10px 12px;
+            border-radius: 5px;
+        }
+
+        .sessiontitle {
+            font-size: 14px;
+            line-height: 1.45;
+            color: #1b1b20;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 640px) {
+            .daylabel {
+                font-size: 12px;
+            }
+
+            .time-col {
+                width: 70px;
+                min-width: 70px;
+                font-size: 11px;
+            }
+
+            .sessionbar {
+                font-size: 14.5px;
+            }
+
+            .sessiontitle {
+                font-size: 13.5px;
+            }
+
+            .tab {
+                font-size: 13px;
+                padding: 8px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="site-header" class="w-full bg-secondary text-white sticky top-0 z-50 transition-shadow duration-300"
+        style="position: relative;">
+        <!-- Fetching from script.js -->
+    </header>
+
+    <main>
+        <section class="flex-1 pt-20">
+            <div class="container py-10 lg:py-20 px-4 xl:px-0">
+                <div class="theme-card max-w-[1100px] mx-auto w-full px-6 sm:px-9 pt-7 pb-8" data-aos="fade-up">
+                    <p class="kicker text-sm uppercase text-center font-semibold" data-aos="fade-up">National CVD Summit
+                        2026&nbsp; •&nbsp; Goa</p>
+                    <h1 class="text-center font-bold text-3xl lg:text-4xl leading-tight text-[#111114] my-2"
+                        data-aos="fade-up" data-aos-delay="100">Agenda</h1>
+                    <p id="dayLabel" class="daylabel uppercase text-center mt-1" data-aos="fade-up" data-aos-delay="100"></p>
+
+                    <div class="border-t border-[#eeeef0] mt-5 pt-5"></div>
+
+                    <div role="tablist" aria-label="Agenda days"
+                        class="flex items-center justify-center gap-6 sm:gap-10" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <button role="tab" id="tab-day1" aria-controls="panel" aria-selected="true" data-day="day1"
+                            class="tab font-medium">Day 1</button>
+                        <button role="tab" id="tab-day2" aria-controls="panel" aria-selected="false" data-day="day2"
+                            class="tab font-medium">Day 2</button>
+                        <button role="tab" id="tab-day3" aria-controls="panel" aria-selected="false" data-day="day3"
+                            class="tab font-medium">Day 3</button>
+                    </div>
+
+                    <div id="panel" role="tabpanel" aria-labelledby="tab-day1" tabindex="0"
+                        class="mt-6 relative focus:outline-none" data-aos="fade-up" data-aos-delay="300"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="site-footer" class="w-full bg-secondary flex-1">
+        <!-- Fetching from script.js -->
+    </footer>
+
+    <script src="./assets/js/script.js" defer></script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Wait for DOMContentLoaded so the header/footer (injected by
+        // script.js) already exist in the DOM before AOS scans for
+        // data-aos elements.
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({
+                duration: 700,
+                once: true,
+                offset: 80,
+                easing: 'ease-out-cubic'
+            });
+        });
+    </script>
+
+    <script>
+        const agendaData = {
+            day1: {
+                date: "Day 1 • Friday, 25 September 2026 (afternoon start)",
+                events: [
+                    { time: "12:30 - 14:00", bar: "Registration, delegate kit distribution & lunch - 90 min" },
+                    { time: "14:00 - 15:40", bar: "Session 1 - 110 min", title: "CVD Burden, Risk Factors leading to Cardiometabolic Diseases / NP-CND Population-Based Screening" },
+                    { time: "15:50 - 16:05", bar: "Tea Break - 15 min" },
+                    { time: "14:00 - 15:40", bar: "Session 2 - 80 min", title: "Pediatric Cardiovascular Diseases" },
+                    { time: "14:00 - 15:40", bar: "Session 3 - 60 min", title: "Cardiovascular Diseases in Women" },
+                    { time: "14:00 - 15:40", bar: "Day 1 rapporteur synthesis - 20 min", title: "Close of Day 1 scientific sessions" }
+                ]
+            },
+            day2: {
+                date: "Day 2 • Saturday, 26 September 2026",
+                events: [
+                    { time: "09:00 - 09:30", bar: "Registration Continues - 30 min", },
+                    { time: "09:30 - 10:40", bar: "Session 4 - 70 min", title: "Welcome & Inaugural Ceremony (Including Keynote Address)" },
+                    { time: "10:40 - 12:30", bar: "Session 5 - 110 min", title: "India's STEMI Response System" },
+                    { time: "12:30 - 01:30", bar: "Session 6 - 60 min", title: "India's STEMI Reperfusion System" },
+                    { time: "01:30 - 14:30", bar: "Lunch Break - 60 min" },
+                    { time: "14:30 - 15:20", bar: "SPECIAL SESSION - 50 min" },
+                    { time: "15:20 - 16:20", bar: "Session 7 - 60 min", title: "AI and Technology in Cardiovascular Disease Diagnosis and Management" },
+                    { time: "16:20 - 16:35", bar: "Tea and Networking - 15 min" },
+                    { time: "16:35 - 17:15", bar: "Session 8 - 40 min", title: "CVD Implementation in States : Learnings" },
+                    { time: "17:15 - 18:35", bar: "Session 9 - 80 min", title: "The Silent Epidemic: Heart Failure in India" },
+                    { time: "18:35", bar: "Close of Day 2 Scientific Sessions" },
+                    { time: "19:30", bar: "Summit Dinner" }
+                ]
+            },
+            day3: {
+                date: "Day 3 • Sunday, 27 September 2026",
+                events: [
+                    { time: "09:30 - 10:30", bar: "Closed Door Session | Document Preparation" }
+                ]
+            }
+        };
+
+        const HEART = '<svg width="14" height="14" viewBox="0 0 24 24" fill="#b7232c" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9A5.6 5.6 0 0 1 12 5.6 5.6 5.6 0 0 1 21.6 12c-2.1 4.4-9.6 9-9.6 9z"/></svg>';
+
+        const panel = document.getElementById('panel');
+        const dayLabel = document.getElementById('dayLabel');
+        const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+
+        function esc(s) {
+            return String(s).replace(/[&<>"]/g, c => ({ '&': '&', '<': '<', '>': '>', '"': '"' }[c]));
+        }
+
+        function render(dayKey) {
+            const day = agendaData[dayKey];
+            dayLabel.textContent = day.date;
+
+            const rows = day.events.map((ev, i) => `
+                <div class="flex gap-3 ${i === day.events.length - 1 ? '' : 'pb-4'}" data-aos="fade-up" data-aos-delay="${(i % 6) * 80}">
+                    <div class="time-col">${esc(ev.time)}</div>
+                    <div class="relative flex flex-col items-center" style="width:22px;min-width:22px; margin-top: 8px">
+                        ${i === day.events.length - 1 ? '' : '<span class="track" style="top:22px;bottom:-16px"></span>'}
+                        <span class="marker">${HEART}</span>
+                    </div>
+                    <div class="flex-1 items-start min-w-0">
+                        <div class="sessionbar w-full">${esc(ev.bar)}</div>
+                        ${ev.title ? `<p class="sessiontitle">${esc(ev.title)}</p>` : ''}
+                    </div>
+                </div>
+            `).join('');
+
+            panel.innerHTML = rows;
+            panel.setAttribute('aria-labelledby', 'tab-' + dayKey);
+
+            // Re-scan the freshly injected rows so AOS animates them too
+            if (window.AOS) {
+                AOS.refreshHard();
+            }
+        }
+
+        function selectTab(tab, focus) {
+            tabs.forEach(t => t.setAttribute('aria-selected', String(t === tab)));
+            render(tab.dataset.day);
+            if (focus) tab.focus();
+        }
+
+        tabs.forEach((tab, idx) => {
+            tab.addEventListener('click', () => selectTab(tab));
+            tab.addEventListener('keydown', (e) => {
+                let next = null;
+                if (e.key === 'ArrowRight') next = tabs[(idx + 1) % tabs.length];
+                if (e.key === 'ArrowLeft') next = tabs[(idx - 1 + tabs.length) % tabs.length];
+                if (e.key === 'Home') next = tabs[0];
+                if (e.key === 'End') next = tabs[tabs.length - 1];
+                if (next) { e.preventDefault(); selectTab(next, true); }
+            });
+        });
+
+        render('day1');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+@import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap);
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colours */
+    --primary: #b7232c;
+    --secondary: #182a54;
+    --tertiary: #e6e9ed;
+
+    --text-dark: #1a1a1a;
+    --text-light: #ffffff;
+    --bright: #ffffff;
+
+    /* Typography */
+    --font-sans: "Lato", sans-serif;
+
+    /* Weight scale */
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    font-family: var(--font-sans);
+    font-weight: var(--fw-regular);
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+.theme-card {
+    border: 1px solid #e9e9ec;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(16, 24, 40, 0.07);
+    background:
+        radial-gradient(circle at 50% 0%, rgba(183, 35, 44, 0.05), transparent 42%),
+        #ffffff;
+}
+
+.bg-primary{
+    background: var(--primary)
+}
+
+.bg-secondary{
+    background: var(--secondary);
+}
+
+.text-primary{
+    color: var(--primary)
+}
+
+.text-secondary{
+    color: var(--secondary);
+}
+
+.flex-1 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    height: 3.2rem;
+    width: 10rem;
+    object-fit: contain
+}
+
+#site-header{
+    width: 100%;
+    position: fixed!important;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+#mobile-menu {
+    position: absolute;
+    top: 100%;
+    /* sits flush below the header bar */
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background: var(--secondary);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+
+    /* hidden state */
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    visibility: hidden;
+
+    transition:
+        opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0.28s;
+}
+
+#mobile-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+    transition:
+        opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0s;
+}
+
+/* ─── Desktop dropdown panel (absolute, fade+slide) ────────────── */
+.dropdown-panel {
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    visibility: hidden;
+    transition:
+        opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0.22s;
+}
+
+.dropdown-panel.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+    transition:
+        opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0s;
+}
+
+/* ─── Mobile More submenu: grid-row collapse (in-flow, black) ─── */
+#mobile-more-dropdown {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    /* reset absolute-panel overrides */
+    transform: none;
+    pointer-events: none;
+    visibility: visible;
+    transition:
+        grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.25s ease;
+}
+
+#mobile-more-dropdown>div {
+    overflow: hidden;
+}
+
+#mobile-more-dropdown.open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    visibility: visible;
+}
+
+/* ─── Hamburger → X transition ─────────────────────────────────── */
+.ham-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+
+.ham-wrap.active .ham-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.ham-wrap.active .ham-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.ham-wrap.active .ham-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ─── Desktop nav-link underline ───────────────────────────────── */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: width 0.22s ease;
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+    width: 70%;
+}
+
+/* ─── Chevron rotation ──────────────────────────────────────────── */
+.chevron {
+    transition: transform 0.22s ease;
+}
+
+.chevron.rotated {
+    transform: rotate(180deg);
+}
+
+/* ─── Focus ring ────────────────────────────────────────────────── */
+*:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.65);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+/* white-bg context: dark focus ring */
+.dropdown-inner *:focus-visible {
+    outline-color: rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Scroll shadow ─────────────────────────────────────────────── */
+.header-scrolled {
+    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* ─── Mobile menu item divider ──────────────────────────────────── */
+.mob-item {
+    display: flex;
+    align-items: center;
+    min-height: 46px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.82);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    transition: color 0.15s ease, background 0.15s ease;
+    padding: 0 1.25rem;
+}
+
+.mob-item:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.mob-item:last-child {
+    border-bottom: none;
+}

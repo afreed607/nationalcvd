@@ -35,12 +35,12 @@
         <!-- Fetching from script.js -->
     </header>
 
-    <main class="relative overflow-hidden pt-20">
+    <main class="relative overflow-hidden pt-36 lg:pt-28">
         <div
             class="pointer-events-none absolute left-0 top-24 hidden h-24 w-24 opacity-70 lg:block bg-[radial-gradient(#e6e9ed_1.5px,transparent_1.5px)] [background-size:14px_14px]">
         </div>
         <section>
-            <div class="container mx-auto px-5 py-14 sm:px-8 lg:px-10 lg:py-20">
+            <div class="container mx-auto px-4 py-14 sm:px-8 lg:py-20">
                 <div data-aos="fade-left">
                     <p class="text-sm font-bold uppercase tracking-wide text-[#b7232c]">We'd love to hear from you
                     </p>
@@ -105,15 +105,21 @@
                             </div>
                             <p class="errmsg mt-1 text-xs text-[#b7232c]">Please write a short message.</p>
                         </div>
-                        
-                        <div class="flex flex-wrap items-center gap-4"><button type="submit"
+
+                        <div class="flex flex-wrap items-center gap-4"><button id="submitBtn" type="submit"
                                 class="group inline-flex min-h-[50px] min-w-[150px] items-center justify-center gap-2 rounded-lg bg-[#b7232c] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-[#b7232c]/15 transition hover:bg-[#182a54] hover:shadow-[#182a54]/20 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-60"><svg
-                                    class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    id="btnIcon" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="m21 3-7.4 18-3.1-7.5L3 10.4 21 3Z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m10.5 13.5 5-5" />
-                                </svg><span>Send Message</span><svg
+                                </svg><svg id="btnLoader" class="hidden h-5 w-5 animate-spin" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                        stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                                </svg><span id="btnText">Send Message</span><svg id="btnArrow"
                                     class="ml-1 h-5 w-5 transition-transform group-hover:translate-x-1"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h13m-5-5 5 5-5 5" />
@@ -224,239 +230,161 @@
             });
         });
     </script>
-    <script>(function () {
+    <script>
+        (function () {
 
-            const form =
-                document.getElementById('contactForm');
+            const form = document.getElementById("contactForm");
+            const submitBtn = document.getElementById("submitBtn");
+            const btnText = document.getElementById("btnText");
+            const btnIcon = document.getElementById("btnIcon");
+            const btnArrow = document.getElementById("btnArrow");
+            const btnLoader = document.getElementById("btnLoader");
+            const toast = document.getElementById("toast");
 
-            const toast =
-                document.getElementById('toast');
+            const scriptURL =
+                "https://script.google.com/macros/s/AKfycbxDqPMhNDJP7rq6_NynO8oVVDjGFF5roqO7Jf3YdSJE-NfFXSL663bb-f-S6LUnBbrg/exec";
 
-            const policy =
-                document.getElementById('policy');
+            const fields = ["first", "phone", "email", "message"];
 
-            const policyErr =
-                document.getElementById('policyErr');
+            // ==========================================
+            // STRICT CLIENT-SIDE VALIDATION
+            // ==========================================
 
+            const nameRe =
+                /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)+$/;
+
+            const phoneRe = /^[6-9][0-9]{9}$/;
 
             const emailRe =
-                /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+                /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
 
-
-            function valid(el) {
-
-                const value =
-                    el.value.trim();
-
-
-                if (!value) {
-                    return false;
-                }
-
-
-                if (el.type === 'email') {
-                    return emailRe.test(value);
-                }
-
-
-                if (el.type === 'tel') {
-                    return value.replace(/\D/g, '').length >= 8;
-                }
-
-
-                return true;
-
+            function fieldContainer(input) {
+                // label > .relative wrapper > input, errmsg is a sibling of the .relative wrapper
+                return input.closest("div").parentElement;
             }
 
-
-            function mark(el) {
-
-                el.classList.toggle(
-                    'err',
-                    !valid(el)
-                );
-
+            function setFieldError(input, showError, message) {
+                input.classList.toggle("err", showError);
+                const container = fieldContainer(input);
+                const msg = container ? container.querySelector(".errmsg") : null;
+                if (msg) {
+                    if (message) msg.textContent = message;
+                    msg.style.display = showError ? "block" : "none";
+                }
             }
 
+            function validateField(id) {
+                const input = document.getElementById(id);
+                const val = input.value.trim();
+                let valid = true;
 
-            const fields =
-                Array.from(
-                    form.querySelectorAll('.fld')
-                );
+                if (id === "first") {
+                    valid = val.length >= 2 && val.length <= 100 && nameRe.test(val);
+                    if (!valid) setFieldError(input, true, "Please enter your first and last name.");
+                } else if (id === "phone") {
+                    valid = phoneRe.test(val);
+                    if (!valid) setFieldError(input, true, "Enter a valid 10-digit mobile number.");
+                } else if (id === "email") {
+                    valid = !!val && val.length <= 254 && emailRe.test(val);
+                    if (!valid) setFieldError(input, true, "Please enter a valid email address.");
+                } else if (id === "message") {
+                    valid = val.length >= 5 && val.length <= 2000;
+                    if (!valid) setFieldError(input, true, "Message must be between 5 and 2000 characters.");
+                }
 
+                if (valid) setFieldError(input, false);
 
-            fields.forEach(function (el) {
+                return valid;
+            }
 
-                el.addEventListener(
-                    'blur',
-                    function () {
-                        mark(el);
+            // Live-clear an error once the user fixes a field that previously failed
+            fields.forEach(function (id) {
+                const input = document.getElementById(id);
+                input.addEventListener("input", function () {
+                    if (input.classList.contains("err")) validateField(id);
+                });
+            });
+
+            function showToast(message, isError) {
+                toast.textContent = message;
+                toast.classList.remove("hidden");
+                toast.classList.toggle("border-[#b7232c]", !!isError);
+                toast.classList.toggle("text-[#b7232c]", !!isError);
+                toast.classList.toggle("bg-[#fbeaec]", !!isError);
+                toast.classList.toggle("border-[#e6e9ed]", !isError);
+                toast.classList.toggle("text-[#182a54]", !isError);
+                toast.classList.toggle("bg-[#e6e9ed]", !isError);
+            }
+
+            function setLoading(isLoading) {
+                submitBtn.disabled = isLoading;
+                btnLoader.classList.toggle("hidden", !isLoading);
+                btnIcon.classList.toggle("hidden", isLoading);
+                btnArrow.classList.toggle("hidden", isLoading);
+                btnText.textContent = isLoading ? "Sending..." : "Send Message";
+            }
+
+            form.addEventListener("submit", async function (e) {
+
+                e.preventDefault();
+
+                // Guard against double submits (one-click submission)
+                if (submitBtn.disabled) return;
+
+                toast.classList.add("hidden");
+
+                let valid = true;
+                fields.forEach(function (id) {
+                    if (!validateField(id)) valid = false;
+                });
+
+                if (!valid) return;
+
+                setLoading(true);
+
+                const formData = new FormData();
+                formData.append("Name", document.getElementById("first").value.trim());
+                formData.append("Phone", document.getElementById("phone").value.trim());
+                formData.append("Email", document.getElementById("email").value.trim());
+                formData.append("Message", document.getElementById("message").value.trim());
+
+                try {
+
+                    const response = await fetch(scriptURL, {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    let result = null;
+                    try {
+                        result = await response.json();
+                    } catch (parseErr) {
+                        result = null;
                     }
-                );
 
-
-                el.addEventListener(
-                    'input',
-                    function () {
-
-                        if (
-                            el.classList.contains('err')
-                        ) {
-
-                            mark(el);
-
-                        }
-
+                    if (result && result.result === "success") {
+                        form.reset();
+                        showToast("Thank you — your message has been sent.", false);
+                    } else {
+                        const errMsg = (result && result.message) || "Something went wrong. Please try again.";
+                        throw new Error(errMsg);
                     }
-                );
+
+                } catch (error) {
+
+                    console.error(error);
+                    showToast("Something went wrong. Please try again.", true);
+
+                } finally {
+
+                    setLoading(false);
+
+                }
 
             });
 
-
-            policy.addEventListener(
-                'change',
-                function () {
-
-                    policyErr.style.display =
-                        policy.checked
-                            ? 'none'
-                            : 'block';
-
-                }
-            );
-
-
-            form.addEventListener(
-                'submit',
-                function (e) {
-
-                    e.preventDefault();
-
-
-                    toast.classList.add(
-                        'hidden'
-                    );
-
-
-                    let ok = true;
-
-
-                    fields.forEach(
-                        function (el) {
-
-                            mark(el);
-
-                            if (!valid(el)) {
-                                ok = false;
-                            }
-
-                        }
-                    );
-
-
-                    if (!policy.checked) {
-
-                        policyErr.style.display =
-                            'block';
-
-                        ok = false;
-
-                    }
-
-
-                    if (!ok) {
-
-                        const first =
-                            form.querySelector(
-                                '.fld.err'
-                            );
-
-                        if (first) {
-                            first.focus();
-                        }
-
-                        return;
-
-                    }
-
-
-                    const btn =
-                        form.querySelector(
-                            '.btn-submit'
-                        );
-
-
-                    btn.disabled = true;
-
-                    btn.innerHTML =
-                        '<span>Sending...</span>';
-
-
-                    setTimeout(
-                        function () {
-
-                            btn.disabled = false;
-
-
-                            btn.innerHTML = `
-                                <svg
-                                    class="h-5 w-5"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2">
-
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m21 3-7.4 18-3.1-7.5L3 10.4 21 3Z" />
-
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m10.5 13.5 5-5" />
-
-                                </svg>
-
-                                <span>
-                                    Send Message
-                                </span>
-
-                                <svg
-                                    class="ml-1 h-5 w-5"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2">
-
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M5 12h13m-5-5 5 5-5 5" />
-
-                                </svg>
-                            `;
-
-
-                            form.reset();
-
-
-                            policyErr.style.display =
-                                'none';
-
-
-                            toast.classList.remove(
-                                'hidden'
-                            );
-
-                        },
-                        700
-                    );
-
-                }
-            );
-
-        })();</script>
+        })();
+    </script>
 </body>
 
 </html>

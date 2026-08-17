@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+::selection {
+    background: #f0d5d7;
+}
+
 :root {
     /* Colours */
     --primary: #b7232c;
@@ -15,6 +19,11 @@
     --text-dark: #1a1a1a;
     --text-light: #ffffff;
     --bright: #ffffff;
+    
+    --muted: #3f4a63;
+    --muted-2: #6b7690;
+    --muted-3: #9aa6c0;
+    --surface: #f4f6f8;
 
     /* Typography */
     --font-sans: "Lato", sans-serif;
@@ -48,22 +57,75 @@ body {
         #ffffff;
 }
 
-.bg-primary{
-    background: var(--primary)
+@keyframes sweep {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+ 
+.animate-sweep {
+    animation: sweep 26s linear infinite;
 }
 
-.bg-secondary{
+.bg-primary {
+    background: var(--primary);
+}
+ 
+.bg-primary-dark {
+    background: var(--primary-dark);
+}
+ 
+.bg-secondary {
     background: var(--secondary);
 }
-
-.text-primary{
-    color: var(--primary)
+ 
+.bg-secondary-dark {
+    background: var(--secondary-dark);
 }
-
-.text-secondary{
+ 
+.bg-tertiary {
+    background: var(--tertiary);
+}
+ 
+.bg-surface {
+    background: var(--surface);
+}
+ 
+.text-primary {
+    color: var(--primary);
+}
+ 
+.text-secondary {
     color: var(--secondary);
 }
 
+.text-tertiary{
+    color: var(--tertiary)
+}
+ 
+.text-primary-soft {
+    color: var(--primary-soft);
+}
+ 
+.text-muted {
+    color: var(--muted);
+}
+ 
+.text-muted-2 {
+    color: var(--muted-2);
+}
+ 
+.text-muted-3 {
+    color: var(--muted-3);
+}
+ 
+.border-tertiary {
+    border-color: var(--tertiary);
+}
+ 
+.border-secondary {
+    border-color: var(--secondary);
+}
+ 
 .flex-1 {
     position: relative;
     display: flex;

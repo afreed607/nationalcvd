@@ -178,7 +178,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./index.html"
+                    <a href="./inspiration.html"
                         class="nav-link flex items-center gap-2 px-3 py-2 text-sm md:text-[1rem] font-medium text-gray-200 hover:text-white rounded transition-colors duration-200">
                         <svg
                         aria-hidden="true"

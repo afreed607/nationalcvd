@@ -98,7 +98,7 @@
                  </a>
              </li>
              <li>
-                 <a href="#"
+                 <a href="https://drive.google.com/file/d/1sulwOduN_oHN4ni_5EYgbRG-Xz0tfyYN/view?usp=drive_link" target="_blank"
                      class="px-3 py-2 flex items-center gap-2 text-sm md:text-[1rem] font-semibold text-gray-200 hover:text-white rounded transition-colors duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -255,7 +255,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="https://drive.google.com/file/d/1sulwOduN_oHN4ni_5EYgbRG-Xz0tfyYN/view?usp=drive_link" target="_blank"
                         class="nav-link px-3 py-2 flex items-center gap-2 text-sm md:text-[1rem] font-medium text-gray-200 hover:text-white rounded transition-colors duration-200">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -287,17 +287,13 @@
                         class="dropdown-panel absolute right-0 top-[calc(100%+10px)] min-w-[168px] z-50">
                         <div
                             class="dropdown-inner bg-white text-gray-800 rounded-xl shadow-2xl border border-gray-100 overflow-hidden py-1.5">
-                            <a href="#" role="menuitem" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700
+                            <a href="./press.html" role="menuitem" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700
                   hover:bg-gray-50 hover:text-black transition-colors duration-150">
                                 Press
                             </a>
                             <a href="./contact.html#location/map" role="menuitem" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700
                   hover:bg-gray-50 hover:text-black transition-colors duration-150">
                                 Location
-                            </a>
-                            <a href="./contact.html#location/map" role="menuitem" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700
-                  hover:bg-gray-50 hover:text-black transition-colors duration-150">
-                                Map
                             </a>
                         </div>
                     </div>
@@ -443,14 +439,11 @@
                     <div id="mobile-more-dropdown" role="menu" aria-labelledby="mobile-more-btn"
                         class="dropdown-panel">
                         <div class="border-t border-white/8">
-                            <a href="#" role="menuitem" class="mob-item pl-8 gap-3 flex items-center">
+                            <a href="./press.html" role="menuitem" class="mob-item pl-8 gap-3 flex items-center">
                                 Press
                             </a>
                             <a href="./contact.html#location/map" role="menuitem" class="mob-item pl-8 gap-3 flex items-center">
                                 Location
-                            </a>
-                            <a href="./contact.html#location/map" role="menuitem" class="mob-item pl-8 gap-3 flex items-center border-b-0">
-                                Map
                             </a>
                         </div>
                     </div>
